@@ -261,7 +261,7 @@ footer .num{font-size:24px}
   var m=document.getElementById('vmodal'),v=document.getElementById('vplayer'),open=document.getElementById('playVideo');
   function close(){v.pause();m.hidden=true;document.body.style.overflow='';open.focus();}
   open.addEventListener('click',function(){
-    if(!v.getAttribute('src'))v.src='video/cec-hyb.mp4';
+    if(!v.getAttribute('src'))v.src='video/cec-hyb.mp4?v=2';
     m.hidden=false;document.body.style.overflow='hidden';
     var p=v.play(); if(p&&p.catch)p.catch(function(){});
     document.getElementById('vclose').focus();
