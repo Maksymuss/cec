@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Электростанции CEC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: витрина-каталог — шапка с телефоном, две товарные секции (галерея слева, цена и характеристики справа), повторяющийся блок заказа. Тёмная тема выбрана намеренно, в тон карточкам. */
+:root{
+  --bg:#121419;
+  --surface:#1b1e25;
+  --line:#2c3039;
+  --fg:#eef0f3;
+  --muted:#a2a8b4;
+  --amber:#f5c400;
+  --orange:#ff6a1a;
+  --ink:#121419;
+  --display:"Unbounded","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.18em;line-height:1}
+.logo small{display:block;font-family:var(--body);font-size:10px;letter-spacing:.24em;color:var(--muted);font-weight:500;margin-top:5px}
+.phone-top{display:flex;align-items:center;gap:12px;font-weight:800;font-size:17px;text-decoration:none;white-space:nowrap}
+.phone-top span{color:var(--muted);font-weight:500;font-size:13px}
+@media (max-width:560px){.phone-top span{display:none}}
+
+.intro{padding-block:56px 32px}
+.intro h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,54px);line-height:1.08;margin:0;text-wrap:balance;max-width:16ch}
+.intro p{color:var(--muted);font-size:18px;max-width:58ch;margin:18px 0 0}
+.jump{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.jump a{border:1px solid var(--line);border-radius:999px;padding:10px 18px;text-decoration:none;font-weight:700;font-size:15px;background:var(--surface)}
+.jump a b{color:var(--amber);font-weight:800}
+.jump a:hover,.jump a:focus-visible{border-color:var(--amber);outline:none}
+
+.product{padding-block:48px;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:44px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr);gap:28px}}
+
+.gallery .main{width:100%;aspect-ratio:3/4;max-width:100%;border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
+.gallery .main img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery .main{position:relative}
+.garrow{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(18,20,25,.72);color:#fff;font-size:34px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);padding:0 0 4px}
+.garrow.prev{left:12px}.garrow.next{right:12px}
+.garrow:hover{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.garrow:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.gcount{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(18,20,25,.72);color:#fff;font-size:14px;font-weight:700;padding:5px 12px;border-radius:999px;font-variant-numeric:tabular-nums}
+.gallery .main:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.thumbs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:10px}
+.thumbs button{padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:var(--surface);cursor:pointer;aspect-ratio:3/4}
+.thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
+.thumbs button[aria-current="true"]{border-color:var(--accent)}
+.thumbs button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+
+.info{min-width:0;position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px)}
+@media (max-width:900px){.info{position:static}}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.info h2{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.12;margin:10px 0 0;text-wrap:balance}
+.model{color:var(--muted);margin-top:8px;font-size:15px}
+.keys{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.key{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--surface)}
+.key b{display:block;font-family:var(--display);font-weight:800;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}
+.key b.a{color:var(--accent)}
+.key span{color:var(--muted);font-size:14px}
+
+.buy{margin-top:22px;border-radius:16px;padding:22px;background:var(--surface);border:1px solid var(--accent)}
+.until{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.prices{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-top:8px}
+.now{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.4vw,44px);line-height:1;font-variant-numeric:tabular-nums}
+.old{color:var(--muted);text-decoration:line-through;font-size:20px;font-variant-numeric:tabular-nums}
+.order{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:18px;padding:17px 20px;border-radius:12px;background:var(--accent);color:var(--ink);font-weight:800;font-size:18px;text-decoration:none;border:0;cursor:pointer;font-family:var(--body)}
+.order:hover{filter:brightness(1.07)}
+.order:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.callrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;font-size:15px;color:var(--muted)}
+.num{color:var(--fg);font-weight:800;font-size:18px;user-select:all;font-variant-numeric:tabular-nums}
+.copy{background:none;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:7px 12px;font:600 14px var(--body);cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--fg)}
+
+.specs{margin-top:26px}
+.specs h3{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;font-weight:800}
+.specs table{width:100%;border-collapse:collapse;font-size:15px}
+.specs td{padding:10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.specs td:last-child{text-align:right;font-weight:700;padding-left:16px}
+.note{margin-top:14px;font-size:14px;color:var(--muted)}
+
+.hyb{--accent:var(--orange)}
+.aio{--accent:var(--amber)}
+
+footer{border-top:1px solid var(--line);padding-block:40px 56px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center}
+footer p{margin:0;color:var(--muted);font-size:15px}
+footer .num{font-size:24px}
+
+@media (prefers-reduced-motion:no-preference){.gallery .main img{transition:opacity .2s}}
+</style>
+</head><body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="logo">CEC<small>POWER INDEPENDENT</small></div>
+    <a class="phone-top" href="tel:+79493741211"><span>Заказ по телефону</span>+7 949 374-12-11</a>
+  </div>
+</header>
+
+<main>
+  <section class="intro wrap">
+    <div class="intro-text">
+    <h1>Электростанции CEC в наличии</h1>
+    <p>Резервное питание для дома, дачи и работы. Литий-железо-фосфатные батареи, заряд от сети и от солнечных панелей. Звоните, ответим на вопросы и оформим заказ.</p>
+    <nav class="jump" aria-label="Модели">
+      <a href="#hyb">HY-B 2500 Вт · <b>129 999 ₽</b></a>
+      <a href="#aio">All-in-One 3,6 кВт · <b>230 000 ₽</b></a>
+    </nav>
+    <a class="order hero-call" href="tel:+79493741211">Позвонить: +7 949 374-12-11</a>
+    </div>
+    <a class="hero-img" href="#hyb"><img src="img/HY-B_banner_orig.jpg" alt="Портативная электростанция CEC HY-B: 2500 Вт, 3072 Вт·ч, 129 999 ₽"></a>
+  </section>
+  <style>
+  .intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
+  .intro-text{min-width:0}
+  .hero-img{display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);max-width:100%}
+  .hero-img img{display:block;width:100%;height:auto}
+  .hero-call{--accent:var(--orange);margin-top:28px;width:auto;display:inline-flex}
+  @media (max-width:900px){.intro{grid-template-columns:minmax(0,1fr);gap:28px}}
+  </style>
+
+  <!-- HY-B -->
+  <section class="product hyb" id="hyb">
+    <div class="wrap grid">
+      <div class="gallery" data-gallery>
+        <div class="main"><img src="img/HY-B_1_glavnaya.jpg" alt="Портативная электростанция CEC HY-B-24V 2500 Вт, 3072 Вт·ч"></div>
+        <div class="thumbs">
+          <button type="button" aria-current="true" data-src="img/HY-B_1_glavnaya.jpg" aria-label="Фото 1"><img src="img/HY-B_1_glavnaya.jpg" alt=""></button>
+          <button type="button" data-src="img/HY-B_2_razemy.jpg" aria-label="Фото 2"><img src="img/HY-B_2_razemy.jpg" alt=""></button>
+          <button type="button" data-src="img/HY-B_3_rozetki.jpg" aria-label="Фото 3"><img src="img/HY-B_3_rozetki.jpg" alt=""></button>
+          <button type="button" data-src="img/HY-B_4_qi_led.jpg" aria-label="Фото 4"><img src="img/HY-B_4_qi_led.jpg" alt=""></button>
+          <button type="button" data-src="img/HY-B_5_kolesa.jpg" aria-label="Фото 5"><img src="img/HY-B_5_kolesa.jpg" alt=""></button>
+          <button type="button" data-src="img/HY-B_6_harakteristiki.jpg" aria-label="Фото 6"><img src="img/HY-B_6_harakteristiki.jpg" alt=""></button>
+        </div>
+      </div>
+      <div class="info">
+        <div class="kicker">Переносная · на колёсах</div>
+        <h2>Портативная электростанция</h2>
+        <div class="model">CEC HY-B-24V</div>
+        <div class="keys">
+          <div class="key"><b class="a">2500 Вт</b><span>мощность инвертора</span></div>
+          <div class="key"><b>3072 Вт·ч</b><span>ёмкость LiFePO4</span></div>
+        </div>
+        <div class="buy">
+          <div class="until">Цена до 1 ноября</div>
+          <div class="prices"><span class="now">129 999 ₽</span><span class="old">150 000 ₽</span></div>
+          <a class="order" href="tel:+79493741211">Заказать по телефону</a>
+          <div class="callrow"><span>Телефон: <span class="num">+7 949 374-12-11</span></span><button class="copy" type="button" data-copy>Скопировать</button></div>
+        </div>
+        <div class="specs">
+          <h3>Характеристики</h3>
+          <table>
+            <tr><td>Мощность инвертора</td><td>2500 Вт</td></tr>
+            <tr><td>Батарея</td><td>LiFePO4, 25,6 В / 120 А·ч</td></tr>
+            <tr><td>Ёмкость</td><td>3072 Вт·ч</td></tr>
+            <tr><td>Розетки 220 В</td><td>3 шт, 50 Гц</td></tr>
+            <tr><td>USB</td><td>5 × USB-A (5 В / 3 А), 1 × Type-C</td></tr>
+            <tr><td>DC 12 В</td><td>2 × 5 А, прикуриватель</td></tr>
+            <tr><td>Беспроводная зарядка</td><td>на крышке</td></tr>
+            <tr><td>Заряд от сети</td><td>адаптер 29,2 В / 20 А</td></tr>
+            <tr><td>Заряд от солнца</td><td>до 540 Вт, до 36 В</td></tr>
+            <tr><td>Размер</td><td>59 × 26,5 × 35 см</td></tr>
+            <tr><td>Вес</td><td>34 кг</td></tr>
+            <tr><td>Гарантия</td><td>2 года</td></tr>
+          </table>
+          <p class="note">В комплекте: зарядное устройство, кабель XT90–MC4 для солнечных панелей, разветвители MC4, 2 LED-лампы с кабелем 5 м, инструкция на русском.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ALL-IN-ONE -->
+  <section class="product aio" id="aio">
+    <div class="wrap grid">
+      <div class="gallery" data-gallery>
+        <div class="main"><img src="img/AIO_1_glavnaya.jpg" alt="Гибридная станция CEC All-in-One 3,6 кВт, 7,68 кВт·ч"></div>
+        <div class="thumbs">
+          <button type="button" aria-current="true" data-src="img/AIO_1_glavnaya.jpg" aria-label="Фото 1"><img src="img/AIO_1_glavnaya.jpg" alt=""></button>
+          <button type="button" data-src="img/AIO_2_tri_v_odnom.jpg" aria-label="Фото 2"><img src="img/AIO_2_tri_v_odnom.jpg" alt=""></button>
+          <button type="button" data-src="img/AIO_3_ibp.jpg" aria-label="Фото 3"><img src="img/AIO_3_ibp.jpg" alt=""></button>
+          <button type="button" data-src="img/AIO_4_solnce.jpg" aria-label="Фото 4"><img src="img/AIO_4_solnce.jpg" alt=""></button>
+          <button type="button" data-src="img/AIO_5_batareya.jpg" aria-label="Фото 5"><img src="img/AIO_5_batareya.jpg" alt=""></button>
+          <button type="button" data-src="img/AIO_6_podklyuchenie.jpg" aria-label="Фото 6"><img src="img/AIO_6_podklyuchenie.jpg" alt=""></button>
+          <button type="button" data-src="img/AIO_7_harakteristiki.jpg" aria-label="Фото 7"><img src="img/AIO_7_harakteristiki.jpg" alt=""></button>
+        </div>
+      </div>
+      <div class="info">
+        <div class="kicker">Для дома · работает как ИБП</div>
+        <h2>Гибридная станция «всё в одном»</h2>
+        <div class="model">CEC All-in-One ESS 3.6KW + 7.68KWh</div>
+        <div class="keys">
+          <div class="key"><b class="a">3,6 кВт</b><span>инвертор, пик 5400 ВА</span></div>
+          <div class="key"><b>7,68 кВт·ч</b><span>ёмкость LiFePO4</span></div>
+        </div>
+        <div class="buy">
+          <div class="until">Цена до 1 ноября</div>
+          <div class="prices"><span class="now">230 000 ₽</span><span class="old">280 000 ₽</span></div>
+          <a class="order" href="tel:+79493741211">Заказать по телефону</a>
+          <div class="callrow"><span>Телефон: <span class="num">+7 949 374-12-11</span></span><button class="copy" type="button" data-copy>Скопировать</button></div>
+        </div>
+        <div class="specs">
+          <h3>Характеристики</h3>
+          <table>
+            <tr><td>Мощность инвертора</td><td>3600 Вт</td></tr>
+            <tr><td>Пиковая мощность</td><td>5400 ВА</td></tr>
+            <tr><td>Форма сигнала</td><td>чистая синусоида</td></tr>
+            <tr><td>Батарея</td><td>LiFePO4, 25,6 В / 300 А·ч</td></tr>
+            <tr><td>Ёмкость</td><td>7680 Вт·ч</td></tr>
+            <tr><td>Ресурс</td><td>6000 циклов при разряде 90%</td></tr>
+            <tr><td>Выход</td><td>220/230 В, 50/60 Гц</td></tr>
+            <tr><td>Вход от сети</td><td>170–280 В</td></tr>
+            <tr><td>Солнечный контроллер</td><td>MPPT, 40–450 В, до 18 А</td></tr>
+            <tr><td>Ток заряда батареи</td><td>до 100 А</td></tr>
+            <tr><td>Размер</td><td>74 × 40 × 24 см</td></tr>
+            <tr><td>Вес</td><td>65,8 кг</td></tr>
+            <tr><td>Рабочая температура</td><td>−10…+55 °C</td></tr>
+            <tr><td>Защита корпуса</td><td>IP21, для помещений</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo">CEC<small>POWER INDEPENDENT</small></div>
+    </div>
+    <div>
+      <p>Заказ и вопросы по телефону</p>
+      <a class="num" href="tel:+79493741211" style="text-decoration:none">+7 949 374-12-11</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('[data-gallery]').forEach(function(g){
+  var box=g.querySelector('.main'), main=box.querySelector('img');
+  var thumbs=[].slice.call(g.querySelectorAll('.thumbs button')), i=0;
+  var count=document.createElement('div'); count.className='gcount'; box.appendChild(count);
+  function show(n){
+    i=(n+thumbs.length)%thumbs.length;
+    main.src=thumbs[i].dataset.src;
+    thumbs.forEach(function(x,k){x.setAttribute('aria-current',k===i?'true':'false')});
+    count.textContent=(i+1)+' / '+thumbs.length;
+  }
+  [['prev','‹','Предыдущее фото',-1],['next','›','Следующее фото',1]].forEach(function(a){
+    var b=document.createElement('button'); b.type='button'; b.className='garrow '+a[0];
+    b.innerHTML=a[1]; b.setAttribute('aria-label',a[2]);
+    b.addEventListener('click',function(){show(i+a[3])}); box.appendChild(b);
+  });
+  thumbs.forEach(function(b,k){b.addEventListener('click',function(){show(k)})});
+  var x0=null;
+  box.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  box.addEventListener('touchend',function(e){
+    if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; x0=null;
+    if(Math.abs(dx)>40)show(i+(dx<0?1:-1));
+  });
+  box.tabIndex=0;
+  box.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)});
+  show(0);
+});
+document.querySelectorAll('[data-copy]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var t='+79493741211';
+    var done=function(){btn.textContent='Скопировано';setTimeout(function(){btn.textContent='Скопировать'},1800)};
+    try{navigator.clipboard.writeText(t).then(done,function(){sel(btn)})}catch(e){sel(btn)}
+  });
+});
+function sel(btn){var n=btn.parentNode.querySelector('.num');var r=document.createRange();r.selectNodeContents(n);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+</script>
+</body></html>
