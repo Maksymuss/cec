@@ -2,8 +2,6 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Электростанции CEC</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;700;800&display=swap">
 <style>
 /* Layout: витрина-каталог — шапка с телефоном, две товарные секции (галерея слева, цена и характеристики справа), повторяющийся блок заказа. Тёмная тема выбрана намеренно, в тон карточкам. */
 :root{
@@ -15,8 +13,8 @@
   --amber:#f5c400;
   --orange:#ff6a1a;
   --ink:#121419;
-  --display:"Unbounded","Manrope",system-ui,sans-serif;
-  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -120,7 +118,7 @@ footer .num{font-size:24px}
     </nav>
     <a class="order hero-call" href="tel:+79493741211">Позвонить: +7 949 374-12-11</a>
     </div>
-    <a class="hero-img" href="#hyb"><img src="img/HY-B_banner_orig.jpg" alt="Портативная электростанция CEC HY-B: 2500 Вт, 3072 Вт·ч, 129 999 ₽"></a>
+    <a class="hero-img" href="#hyb"><img src="img/HY-B_banner_orig.webp" width="760" height="811" fetchpriority="high" alt="Портативная электростанция CEC HY-B: 2500 Вт, 3072 Вт·ч, 129 999 ₽"></a>
   </section>
   <style>
   .intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
@@ -135,14 +133,14 @@ footer .num{font-size:24px}
   <section class="product hyb" id="hyb">
     <div class="wrap grid">
       <div class="gallery" data-gallery>
-        <div class="main"><img src="img/HY-B_1_glavnaya.jpg" alt="Портативная электростанция CEC HY-B-24V 2500 Вт, 3072 Вт·ч"></div>
+        <div class="main"><img src="img/HY-B_1_glavnaya.webp" width="720" height="960" decoding="async" alt="Портативная электростанция CEC HY-B-24V 2500 Вт, 3072 Вт·ч"></div>
         <div class="thumbs">
-          <button type="button" aria-current="true" data-src="img/HY-B_1_glavnaya.jpg" aria-label="Фото 1"><img src="img/HY-B_1_glavnaya.jpg" alt=""></button>
-          <button type="button" data-src="img/HY-B_2_razemy.jpg" aria-label="Фото 2"><img src="img/HY-B_2_razemy.jpg" alt=""></button>
-          <button type="button" data-src="img/HY-B_3_rozetki.jpg" aria-label="Фото 3"><img src="img/HY-B_3_rozetki.jpg" alt=""></button>
-          <button type="button" data-src="img/HY-B_4_qi_led.jpg" aria-label="Фото 4"><img src="img/HY-B_4_qi_led.jpg" alt=""></button>
-          <button type="button" data-src="img/HY-B_5_kolesa.jpg" aria-label="Фото 5"><img src="img/HY-B_5_kolesa.jpg" alt=""></button>
-          <button type="button" data-src="img/HY-B_6_harakteristiki.jpg" aria-label="Фото 6"><img src="img/HY-B_6_harakteristiki.jpg" alt=""></button>
+          <button type="button" aria-current="true" data-src="img/HY-B_1_glavnaya.webp" aria-label="Фото 1"><img src="img/t/HY-B_1_glavnaya.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/HY-B_2_razemy.webp" aria-label="Фото 2"><img src="img/t/HY-B_2_razemy.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/HY-B_3_rozetki.webp" aria-label="Фото 3"><img src="img/t/HY-B_3_rozetki.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/HY-B_4_qi_led.webp" aria-label="Фото 4"><img src="img/t/HY-B_4_qi_led.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/HY-B_5_kolesa.webp" aria-label="Фото 5"><img src="img/t/HY-B_5_kolesa.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/HY-B_6_harakteristiki.webp" aria-label="Фото 6"><img src="img/t/HY-B_6_harakteristiki.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
         </div>
       </div>
       <div class="info">
@@ -184,15 +182,15 @@ footer .num{font-size:24px}
   <section class="product aio" id="aio">
     <div class="wrap grid">
       <div class="gallery" data-gallery>
-        <div class="main"><img src="img/AIO_1_glavnaya.jpg" alt="Гибридная станция CEC All-in-One 3,6 кВт, 7,68 кВт·ч"></div>
+        <div class="main"><img src="img/AIO_1_glavnaya.webp" width="720" height="960" loading="lazy" decoding="async" alt="Гибридная станция CEC All-in-One 3,6 кВт, 7,68 кВт·ч"></div>
         <div class="thumbs">
-          <button type="button" aria-current="true" data-src="img/AIO_1_glavnaya.jpg" aria-label="Фото 1"><img src="img/AIO_1_glavnaya.jpg" alt=""></button>
-          <button type="button" data-src="img/AIO_2_tri_v_odnom.jpg" aria-label="Фото 2"><img src="img/AIO_2_tri_v_odnom.jpg" alt=""></button>
-          <button type="button" data-src="img/AIO_3_ibp.jpg" aria-label="Фото 3"><img src="img/AIO_3_ibp.jpg" alt=""></button>
-          <button type="button" data-src="img/AIO_4_solnce.jpg" aria-label="Фото 4"><img src="img/AIO_4_solnce.jpg" alt=""></button>
-          <button type="button" data-src="img/AIO_5_batareya.jpg" aria-label="Фото 5"><img src="img/AIO_5_batareya.jpg" alt=""></button>
-          <button type="button" data-src="img/AIO_6_podklyuchenie.jpg" aria-label="Фото 6"><img src="img/AIO_6_podklyuchenie.jpg" alt=""></button>
-          <button type="button" data-src="img/AIO_7_harakteristiki.jpg" aria-label="Фото 7"><img src="img/AIO_7_harakteristiki.jpg" alt=""></button>
+          <button type="button" aria-current="true" data-src="img/AIO_1_glavnaya.webp" aria-label="Фото 1"><img src="img/t/AIO_1_glavnaya.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/AIO_2_tri_v_odnom.webp" aria-label="Фото 2"><img src="img/t/AIO_2_tri_v_odnom.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/AIO_3_ibp.webp" aria-label="Фото 3"><img src="img/t/AIO_3_ibp.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/AIO_4_solnce.webp" aria-label="Фото 4"><img src="img/t/AIO_4_solnce.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/AIO_5_batareya.webp" aria-label="Фото 5"><img src="img/t/AIO_5_batareya.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/AIO_6_podklyuchenie.webp" aria-label="Фото 6"><img src="img/t/AIO_6_podklyuchenie.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
+          <button type="button" data-src="img/AIO_7_harakteristiki.webp" aria-label="Фото 7"><img src="img/t/AIO_7_harakteristiki.webp" alt="" width="150" height="200" loading="lazy" decoding="async"></button>
         </div>
       </div>
       <div class="info">
