@@ -118,12 +118,19 @@ footer .num{font-size:24px}
     </nav>
     <a class="order hero-call" href="tel:+79493741211">Позвонить: +7 949 374-12-11</a>
     </div>
-    <a class="hero-img" href="#hyb"><img src="img/HY-B_banner_orig.webp" width="760" height="811" fetchpriority="high" alt="Портативная электростанция CEC HY-B: 2500 Вт, 3072 Вт·ч, 129 999 ₽"></a>
+    <button type="button" class="hero-img" id="playVideo" aria-label="Смотреть видео о станции HY-B"><img src="img/HY-B_banner_orig.webp" width="760" height="811" fetchpriority="high" alt="Портативная электростанция CEC HY-B: 2500 Вт, 3072 Вт·ч, 129 999 ₽"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="38" height="38"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="play-label">Смотреть видео</span></button>
   </section>
   <style>
   .intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
   .intro-text{min-width:0}
-  .hero-img{display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);max-width:100%}
+  .hero-img{display:block;position:relative;padding:0;width:100%;cursor:pointer;background:none;border-radius:16px;overflow:hidden;border:1px solid var(--line);max-width:100%}
+  .hero-img:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+  .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;background:rgba(255,106,26,.92);color:#fff;display:flex;align-items:center;justify-content:center;padding-left:6px;box-shadow:0 10px 40px rgba(0,0,0,.5),0 0 0 10px rgba(255,255,255,.18);transition:transform .2s}
+  .hero-img:hover .play{transform:translate(-50%,-50%) scale(1.08)}
+  .play-label{position:absolute;left:50%;top:calc(50% + 66px);transform:translateX(-50%);background:rgba(18,20,25,.78);color:#fff;font-weight:800;font-size:15px;padding:6px 14px;border-radius:999px;white-space:nowrap}
+  .vmodal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 56px) 16px calc(env(safe-area-inset-bottom,0px) + 16px)}
+  .vmodal video{max-height:100%;max-width:100%;width:auto;border-radius:12px;background:#000}
+  .vclose{position:absolute;top:calc(env(safe-area-inset-top,0px) + 10px);right:14px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:28px;line-height:1;cursor:pointer}
   .hero-img img{display:block;width:100%;height:auto}
   .hero-call{--accent:var(--orange);margin-top:28px;width:auto;display:inline-flex}
   @media (max-width:900px){.intro{grid-template-columns:minmax(0,1fr);gap:28px}}
@@ -244,7 +251,26 @@ footer .num{font-size:24px}
   </div>
 </footer>
 
+<div class="vmodal" id="vmodal" hidden role="dialog" aria-modal="true" aria-label="Видео о станции HY-B">
+  <button type="button" class="vclose" id="vclose" aria-label="Закрыть видео">×</button>
+  <video id="vplayer" controls playsinline preload="none" poster="img/HY-B_banner_orig.webp"></video>
+</div>
+
 <script>
+(function(){
+  var m=document.getElementById('vmodal'),v=document.getElementById('vplayer'),open=document.getElementById('playVideo');
+  function close(){v.pause();m.hidden=true;document.body.style.overflow='';open.focus();}
+  open.addEventListener('click',function(){
+    if(!v.getAttribute('src'))v.src='video/cec-hyb.mp4';
+    m.hidden=false;document.body.style.overflow='hidden';
+    var p=v.play(); if(p&&p.catch)p.catch(function(){});
+    document.getElementById('vclose').focus();
+  });
+  document.getElementById('vclose').addEventListener('click',close);
+  m.addEventListener('click',function(e){if(e.target===m)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden)close()});
+})();
+
 document.querySelectorAll('[data-gallery]').forEach(function(g){
   var box=g.querySelector('.main'), main=box.querySelector('img');
   var thumbs=[].slice.call(g.querySelectorAll('.thumbs button')), i=0;
